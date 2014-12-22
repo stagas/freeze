@@ -2,7 +2,7 @@
 /**
  * @module freeze
  * @author stagas
- * @version 1.0.0
+ * @version 2.0.0
  * @desc freeze a dsp function
  * @license mit
  */
@@ -23,8 +23,8 @@ export default function(fn, n_samples){
     play: play
   };
 
-  function play(){
-    if (this.pos === n_samples) this.pos = 0;
-    return this.buffer[this.pos++];
+  function play(t){
+    this.pos = Math.round((t * sampleRate) % n_samples);
+    return this.buffer[this.pos];
   }
 }
